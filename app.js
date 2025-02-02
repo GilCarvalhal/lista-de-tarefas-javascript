@@ -1,5 +1,11 @@
 "use strict";
 
+let banco = [
+  { tarefa: "Estudar Javascript", status: "" },
+  { tarefa: "Netflix", status: "checked" },
+];
+console.log(banco);
+
 function criarItem(text, status = "") {
   const item = document.createElement("label");
   item.classList.add("todo__item");
