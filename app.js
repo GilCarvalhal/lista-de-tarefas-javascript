@@ -6,7 +6,7 @@ let banco = [
 ];
 console.log(banco);
 
-function criarItem(text, status = "") {
+function criarItem(text, status) {
   const item = document.createElement("label");
   item.classList.add("todo__item");
   item.innerHTML = `
@@ -18,4 +18,16 @@ function criarItem(text, status = "") {
   document.getElementById("todoList").appendChild(item);
 }
 
-// criarItem("Criação teste");
+function limparTarefas() {
+  const todoList = document.getElementById("todoList");
+  while (todoList.firstChild) {
+    todoList.removeChild(todoList.lastChild);
+  }
+}
+
+function atualizarTela() {
+  limparTarefas();
+  banco.forEach((item) => criarItem(item.tarefa, item.status));
+}
+
+atualizarTela();
