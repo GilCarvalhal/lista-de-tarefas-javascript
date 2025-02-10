@@ -6,13 +6,13 @@ let banco = [
 ];
 console.log(banco);
 
-function criarItem(text, status) {
+function criarItem(text, status, indice) {
   const item = document.createElement("label");
   item.classList.add("todo__item");
   item.innerHTML = `
-    <input type="checkbox" ${status}/>
+    <input type="checkbox" ${status} data-indice=${indice}/>
     <div>${text}</div>
-    <input type="button" value="X" />
+    <input type="button" value="X" data-indice=${indice} />
     `;
 
   document.getElementById("todoList").appendChild(item);
@@ -27,7 +27,7 @@ function limparTarefas() {
 
 function atualizarTela() {
   limparTarefas();
-  banco.forEach((item) => criarItem(item.tarefa, item.status));
+  banco.forEach((item, indice) => criarItem(item.tarefa, item.status, indice));
 }
 
 function inserirItem(evento) {
@@ -41,6 +41,12 @@ function inserirItem(evento) {
   }
 }
 
+function clickItem(evento) {
+  const elemento = evento.target;
+  console.log(elemento);
+}
+
 document.getElementById("newItem").addEventListener("keypress", inserirItem);
+document.getElementById("todoList").addEventListener("click", clickItem);
 
 atualizarTela();
