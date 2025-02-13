@@ -4,7 +4,6 @@ let banco = [
   { tarefa: "Estudar Javascript", status: "" },
   { tarefa: "Netflix", status: "checked" },
 ];
-console.log(banco);
 
 function criarItem(text, status, indice) {
   const item = document.createElement("label");
@@ -41,9 +40,17 @@ function inserirItem(evento) {
   }
 }
 
+function removerItem(indice) {
+  banco.splice(indice, 1);
+  atualizarTela();
+}
+
 function clickItem(evento) {
   const elemento = evento.target;
-  console.log(elemento);
+  if (elemento.type === "button") {
+    const indice = elemento.dataset.indice;
+    removerItem(indice);
+  }
 }
 
 document.getElementById("newItem").addEventListener("keypress", inserirItem);
