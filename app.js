@@ -9,7 +9,7 @@ function criarItem(text, status, indice) {
   const item = document.createElement("label");
   item.classList.add("todo__item");
   item.innerHTML = `
-    <input type="checkbox" ${status} data-indice=${indice}/>
+    <input type="checkbox" ${status} data-indice=${indice} />
     <div>${text}</div>
     <input type="button" value="X" data-indice=${indice} />
     `;
@@ -33,6 +33,7 @@ function inserirItem(evento) {
   const tecla = evento.key;
   const texto = evento.target.value;
 
+  console.log(evento);
   if (tecla === "Enter") {
     banco.push({ tarefa: texto, status: "" });
     atualizarTela();
@@ -45,11 +46,19 @@ function removerItem(indice) {
   atualizarTela();
 }
 
+function atualizarItem(indice) {
+  banco[indice].status = banco[indice].status === "" ? "checked" : "";
+  atualizarTela();
+}
+
 function clickItem(evento) {
   const elemento = evento.target;
   if (elemento.type === "button") {
     const indice = elemento.dataset.indice;
     removerItem(indice);
+  } else if (elemento.type === "checkbox") {
+    const indice = elemento.dataset.indice;
+    atualizarItem(indice);
   }
 }
 
